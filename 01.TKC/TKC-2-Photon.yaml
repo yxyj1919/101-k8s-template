@@ -1,0 +1,33 @@
+apiVersion: run.tanzu.vmware.com/v1alpha3
+kind: TanzuKubernetesCluster
+metadata:
+  name: tkc-2-ubuntu
+  namespace: ns-1
+  annotations:
+    run.tanzu.vmware.com/resolve-os-image: os-name=ubuntu
+spec:
+   topology:
+     controlPlane:
+       replicas: 1
+       storageClass: wcp-storage-prolicy-1
+       vmClass: best-effort-xsmall
+       tkr:
+         reference:
+           name: v1.26.13---vmware.1-fips.1-tkg.3
+     nodePools:
+     - name: nodepool-1-primary
+       replicas: 1
+       storageClass: wcp-storage-prolicy-1
+       vmClass:  best-effort-xsmall
+       tkr:
+         reference:
+           name: v1.26.13---vmware.1-fips.1-tkg.3
+       volumes:
+       - name: containerd
+         mountPath: /var/lib/containerd
+         capacity:
+           storage: 20Gi
+       - name: kubelet
+         mountPath: /var/lib/kubelet
+         capacity:
+           storage: 10Gi
