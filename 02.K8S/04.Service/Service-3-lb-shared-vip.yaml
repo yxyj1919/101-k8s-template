@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    ako.vmware.com/enable-shared-vip: "shared-vip-key-1"
+  name: sharedvip-avisvc-lb1
+  namespace: default
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.0.75.19
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: avi-server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    ako.vmware.com/enable-shared-vip: "shared-vip-key-1"
+  name: sharedvip-avisvc-lb2
+  namespace: default
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.0.75.19
+  ports:
+  - port: 80
+    protocol: UDP
+    targetPort: 8080
+  selector:
+    app: avi-server
