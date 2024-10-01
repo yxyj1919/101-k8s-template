@@ -1,0 +1,37 @@
+# v1alpha3 
+# Separated containerd and kubelet
+# https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-with-tanzu-tkg/GUID-0DF355EF-AA36-4C0B-B0EF-35BF5F5FD5D4.html
+apiVersion: run.tanzu.vmware.com/v1alpha3
+kind: TanzuKubernetesCluster
+metadata:
+  name: tkc-5
+  namespace: ns-1
+spec:
+  topology:
+    controlPlane:
+      replicas: 1
+      vmClass: best-effort-xsmall
+      storageClass: wcp-storage-prolicy-1
+      tkr:
+        reference:
+          name: v1.25.7---vmware.3-fips.1-tkg.1
+    nodePools:
+    - replicas: 2
+      name: worker-np
+      vmClass: best-effort-xsmall
+      storageClass:  wcp-storage-prolicy-1
+      tkr:
+        reference:
+          name: v1.25.7---vmware.3-fips.1-tkg.1
+      volumes:
+      - name: containerd
+        mountPath: /var/lib/containerd
+        capacity:
+          storage: 20Gi
+      - name: kubelet
+        mountPath: /var/lib/kubelet
+        capacity:
+          storage: 20Gi
+  settings:
+    storage:
+      defaultClass: wcp-storage-prolicy-1

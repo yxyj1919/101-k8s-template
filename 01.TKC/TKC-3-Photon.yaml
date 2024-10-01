@@ -1,8 +1,8 @@
 # v1alpha2
-apiVersion: run.tanzu.vmware.com/
+apiVersion: run.tanzu.vmware.com/v1alpha2
 kind: TanzuKubernetesCluster
 metadata:
-  name: tkc-1
+  name: tkc-3
   namespace: ns-1
 spec:
   topology:
@@ -12,8 +12,9 @@ spec:
       storageClass: wcp-storage-prolicy-1
       tkr:
         reference:
-          name: v1.26.5---vmware.2-fips.1-tkg.1
           #name: v1.23.8---vmware.3-tkg.1
+          name: v1.26.12---vmware.2-fips.1-tkg.2
+          #name: v1.27.10---vmware.1-fips.1-tkg.1.ubuntu
     nodePools:
     - name: worker-nodepool-a1
       replicas: 1
@@ -21,6 +22,6 @@ spec:
       storageClass: wcp-storage-prolicy-1
       tkr:
         reference:
-          name: v1.26.5---vmware.2-fips.1-tkg.1
           #name: v1.23.8---vmware.3-tkg.1
-          #name:  v1.26.13---vmware.1-fips.1-tkg.3
+          name: v1.26.12---vmware.2-fips.1-tkg.2
+          #name:  v1.27.10---vmware.1-fips.1-tkg.1.ubuntu

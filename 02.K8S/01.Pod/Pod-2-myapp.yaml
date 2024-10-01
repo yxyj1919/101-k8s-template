@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2-myapp
+  labels:
+    run: myapp-pod
+    env: dev
+spec:
+  containers:
+  - image: nginx
+    name: nginx-container
+    ports:
+    - containerPort: 80
+    env:
+    - name: FIRST_POD
+      value: "Nginx pod"
