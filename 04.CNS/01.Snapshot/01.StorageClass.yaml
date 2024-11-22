@@ -1,0 +1,10 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: my-sc-1
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"  # Optional
+provisioner: csi.vsphere.vmware.com
+allowVolumeExpansion: true  # Optional: only applicable to vSphere 7.0U1 and above
+parameters:
+   csi.storage.k8s.io/fstype: "ext4"
