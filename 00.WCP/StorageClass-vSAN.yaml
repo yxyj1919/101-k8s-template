@@ -1,9 +1,9 @@
-# VMFS Datatore
+#  vSAN Datatore
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: tkg-vsan-sc
+  name: wcp-storage-policy-1
 provisioner: csi.vsphere.vmware.com
 allowVolumeExpansion: true
 parameters:
-  storagePolicyName: tkg-vsan-policy
+  storagePolicyName: wcp-storage-policy-1

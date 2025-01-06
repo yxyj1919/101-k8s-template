@@ -1,4 +1,8 @@
-# v1alpha3 
+# v1alpha3
+# TKC-5-Photon
+# Name: Chang WANG
+# Date: 2025-01-06
+# CP*1 + WN*2 + vSAN
 # Separated containerd and kubelet
 # https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-with-tanzu-tkg/GUID-0DF355EF-AA36-4C0B-B0EF-35BF5F5FD5D4.html
 apiVersion: run.tanzu.vmware.com/v1alpha3
@@ -11,7 +15,7 @@ spec:
     controlPlane:
       replicas: 1
       vmClass: best-effort-xsmall
-      storageClass: wcp-storage-prolicy-1
+      storageClass: wcp-storage-policy-1
       tkr:
         reference:
           name: v1.25.7---vmware.3-fips.1-tkg.1
@@ -19,7 +23,7 @@ spec:
     - replicas: 2
       name: worker-np
       vmClass: best-effort-xsmall
-      storageClass:  wcp-storage-prolicy-1
+      storageClass:  wcp-storage-policy-1
       tkr:
         reference:
           name: v1.25.7---vmware.3-fips.1-tkg.1
@@ -34,4 +38,4 @@ spec:
           storage: 20Gi
   settings:
     storage:
-      defaultClass: wcp-storage-prolicy-1
+      defaultClass: wcp-storage-policy-1

@@ -1,9 +1,13 @@
 # v1alpha3
-# Separated containerd and kubelet
+# TKC-4-Ubuntu
+# Name: Chang WANG
+# Date: 2025-01-06
+# CP*1 + WN*1 + vSAN  
+# separated: containerd and kubelet 
 apiVersion: run.tanzu.vmware.com/v1alpha3
 kind: TanzuKubernetesCluster
 metadata:
-  name: tkc-2-ubuntu
+  name: tkc-4-ubuntu
   namespace: ns-1
   annotations:
     run.tanzu.vmware.com/resolve-os-image: os-name=ubuntu
@@ -11,7 +15,7 @@ spec:
    topology:
      controlPlane:
        replicas: 1
-       storageClass: wcp-storage-prolicy-1
+       storageClass: wcp-storage-policy-1
        vmClass: best-effort-xsmall
        tkr:
          reference:
@@ -19,7 +23,7 @@ spec:
      nodePools:
      - name: nodepool-1-primary
        replicas: 1
-       storageClass: wcp-storage-prolicy-1
+       storageClass: wcp-storage-policy-1
        vmClass:  best-effort-xsmall
        tkr:
          reference:
