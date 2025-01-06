@@ -8,7 +8,7 @@
 apiVersion: run.tanzu.vmware.com/v1alpha3
 kind: TanzuKubernetesCluster
 metadata:
-  name: tkc-5
+  name: tkc-5-photon
   namespace: ns-1
 spec:
   topology:

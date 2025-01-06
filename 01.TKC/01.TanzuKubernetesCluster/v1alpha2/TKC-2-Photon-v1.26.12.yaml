@@ -1,7 +1,7 @@
 # v1alpha2
 # TKC-2-Photon
 # Name: Chang WANG
-# Date: 2025-01-06
+# Date: 2025-01-06 
 # CP*1 + WN*1 + vSAN
 apiVersion: run.tanzu.vmware.com/v1alpha2
 kind: TanzuKubernetesCluster
@@ -16,15 +16,16 @@ spec:
       storageClass: wcp-storage-policy-1
       tkr:
         reference:
-          name: v1.26.5---vmware.2-fips.1-tkg.1
           #name: v1.23.8---vmware.3-tkg.1
+          name: v1.26.12---vmware.2-fips.1-tkg.2
+          #name: v1.27.10---vmware.1-fips.1-tkg.1.ubuntu
     nodePools:
     - name: worker-nodepool-1
       replicas: 1
       vmClass: best-effort-xsmall
-      storageClass: wcp-storage-policy-1
+      storageClass: wcp-storage-prolicy-1
       tkr:
         reference:
-          name: v1.26.5---vmware.2-fips.1-tkg.1
           #name: v1.23.8---vmware.3-tkg.1
-          #name:  v1.26.13---vmware.1-fips.1-tkg.3
+          name: v1.26.12---vmware.2-fips.1-tkg.2
+          #name:  v1.27.10---vmware.1-fips.1-tkg.1.ubuntu
