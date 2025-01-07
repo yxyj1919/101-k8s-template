@@ -2,7 +2,8 @@
 # TKC-1-Photon
 # Name: Chang WANG
 # Date: 2025-01-06
-# CP*1 + WN*1 + vSAN  
+# CP*1 + WN*1 + VMFS 
+# Verified by: 8.0U3
 apiVersion: run.tanzu.vmware.com/v1alpha2
 kind: TanzuKubernetesCluster
 metadata:
