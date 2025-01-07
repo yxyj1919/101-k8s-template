@@ -3,7 +3,7 @@
 # 设置环境变量
 SVC_VIP=10.0.75.14
 SVC_USERNAME=administrator@vsphere.local
-SVC_PASSWORD=VMware1!
+#SVC_PASSWORD=VMware1!
 TKC_NAME=tkc-1
 TKC_NAMESPACE=ns-1
 
@@ -14,7 +14,6 @@ rm -rf ~/.kube/config
 kubectl vsphere login \
   --server=$SVC_VIP \
   --vsphere-username $SVC_USERNAME \
-  --vsphere-password $SVC_PASSWORD \
   --tanzu-kubernetes-cluster-name $TKC_NAME \
   --tanzu-kubernetes-cluster-namespace $TKC_NAMESPACE \
   --insecure-skip-tls-verify

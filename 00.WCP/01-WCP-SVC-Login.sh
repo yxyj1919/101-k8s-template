@@ -10,8 +10,7 @@ rm -rf ~/.kube/config
 # 登录 vSphere Tanzu
 kubectl vsphere login \
   --server=$SVC_VIP \
-  --vsphere-username $SVC_USERNAME \
-  --vsphere-password $SVC_PASSWORD \
+  --vsphere-username $SVC_USERNAME 
   --insecure-skip-tls-verify
 
 # 打印空行
