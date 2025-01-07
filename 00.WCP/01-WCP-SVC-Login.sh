@@ -3,15 +3,15 @@
 # 设置环境变量
 SVC_VIP=10.0.75.14
 SVC_USERNAME=administrator@vsphere.local
-SVC_PASSWORD=VMware1!
+
 # 删除现有 kubeconfig 文件
 rm -rf ~/.kube/config
 
 # 登录 vSphere Tanzu
 kubectl vsphere login \
-  --server=$SVC_VIP \
-  --vsphere-username $SVC_USERNAME 
-  --insecure-skip-tls-verify
+        --server=$SVC_VIP \
+        --vsphere-username $SVC_USERNAME \
+        --insecure-skip-tls-verify
 
 # 打印空行
 echo ""
