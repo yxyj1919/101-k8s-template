@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # 设置环境变量
+export KUBECTL_VSPHERE_PASSWORD=VMware1!
+
 SVC_VIP=10.0.75.14
 SVC_USERNAME=administrator@vsphere.local
 

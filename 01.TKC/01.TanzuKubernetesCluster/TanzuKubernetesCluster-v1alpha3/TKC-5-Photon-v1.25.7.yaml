@@ -4,8 +4,9 @@
 # Date: 2025-01-06
 # CP*1 + WN*1 + VMFS
 # Separated containerd and kubelet
-
 # https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-with-tanzu-tkg/GUID-0DF355EF-AA36-4C0B-B0EF-35BF5F5FD5D4.html
+# Verified by:   
+
 apiVersion: run.tanzu.vmware.com/v1alpha3
 kind: TanzuKubernetesCluster
 metadata:

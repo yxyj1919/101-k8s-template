@@ -3,7 +3,8 @@
 # Name: Chang WANG
 # Date: 2025-01-07
 # CP*1 + WN*1 + VMFS  
-# Verified by: 8.0U
+# Verified by: 8.0U3
+
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
@@ -12,9 +13,11 @@ metadata:
 spec:
   clusterNetwork:
     services:
-      cidrBlocks: ["100.64.0.0/13"]
+      cidrBlocks: ["10.97.0.0/21"]
+      #cidrBlocks: ["100.64.0.0/13"] # Default value 
     pods:
-      cidrBlocks: ["100.96.0.0/11"]
+      cidrBlocks: ["10.102.0.0/20"]
+      #cidrBlocks: ["100.96.0.0/11"] # Default value
     serviceDomain: "cluster.local"
   topology:
     class: tanzukubernetescluster
