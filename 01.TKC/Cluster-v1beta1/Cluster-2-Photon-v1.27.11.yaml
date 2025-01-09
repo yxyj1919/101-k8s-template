@@ -3,7 +3,7 @@
 # Name: Chang WANG
 # Date: 2025-01-07
 # CP*1 + WN*1 + VMFS  
-# Verified by: 8.0U3
+# Verified by: 8.0U3 2025-01-09
 
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
