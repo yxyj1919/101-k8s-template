@@ -13,3 +13,15 @@ spec:
     - name: mypd
       persistentVolumeClaim:
         claimName: my-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: wcp-storage-policy-1
+  resources:
+    requests:
+      storage: 1Gi

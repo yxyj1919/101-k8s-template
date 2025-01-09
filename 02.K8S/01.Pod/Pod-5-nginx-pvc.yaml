@@ -29,7 +29,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: wcp-storage-prolicy-1
+  storageClassName: wcp-storage-policy-1
   resources:
     requests:
         storage: 3Gi

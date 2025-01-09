@@ -27,6 +27,78 @@ There are two types of TKr formats: non-legacy TKrs and legacy TKRs.
 
 
 # 安全配置
-## 
+## For TKG release v1.24 and earlier
+https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-with-tanzu-tkg/GUID-0AEC33DE-DCE2-4FBE-A33F-73C4EDCCAB88.html
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: psp:privileged
+rules:
+- apiGroups: ['policy']
+  resources: ['podsecuritypolicies']
+  verbs:     ['use']
+  resourceNames:
+  - vmware-system-privileged
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: all:psp:privileged
+roleRef:
+  kind: ClusterRole
+  name: psp:privileged
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: Group
+  name: system:serviceaccounts
+  apiGroup: rbac.authorization.k8s.io
+```
 
-##
+## Configure PSA for TKR 1.25 and Later
+https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-with-tanzu-tkg/GUID-B57DA879-89FD-4C34-8ADB-B21CB3AE67F6.html
+
+### For TKG release v1.25
+- Use the following example command to change the security levels for a given namespace so that PSA warnings and audit notifications are not generated.
+```
+kubectl label --overwrite ns NAMESPACE pod-security.kubernetes.io/audit=privileged 
+kubectl label --overwrite ns NAMESPACE pod-security.kubernetes.io/warn=privileged
+```
+
+
+
+### For TKG releases v1.26 and later
+- 在 Kubernetes 中，Pod 安全性准入（PSA，Pod Security Admission） 是一种机制，用于在集群级别或命名空间级别实施 Pod 的安全性标准（如 Pod Security Standards）。如果你想降低 PSA 到最低（即允许最宽松的配置），你需要将策略设置为 privileged。
+- Use the following example command to downgrade the PSA standard from restricted to baseline
+```
+kubectl label --overwrite ns NAMESPACE pod-security.kubernetes.io/enforce=baseline
+```
+- Use the following example command to downgrade the PSA standard from restricted to privileged
+```
+kubectl label --overwrite ns NAMESPACE pod-security.kubernetes.io/enforce=privileged
+```
+- Use the following example commands to relax PSA across all non-system namespaces
+```
+kubectl label --overwrite ns --all pod-security.kubernetes.io/enforce=privileged
+```
+
+```
+参数说明：
+	•	enforce: 强制执行的策略（将拒绝不符合条件的 Pod）。
+	•	audit: 审计策略（记录不符合条件的 Pod，但不拒绝）。
+	•	warn: 警告策略（给出警告，但不拒绝 Pod）。
+```
+
+```
+kubectl label namespace default \
+    pod-security.kubernetes.io/enforce=privileged \
+    pod-security.kubernetes.io/audit=privileged \
+    pod-security.kubernetes.io/warn=privileged --overwrite
+```
+- How to verify the PSA configuration
+```
+kubectl get namespaces --show-labels
+
+NAME        STATUS   AGE   LABELS
+default     Active   10d   pod-security.kubernetes.io/enforce=privileged,...
+```
