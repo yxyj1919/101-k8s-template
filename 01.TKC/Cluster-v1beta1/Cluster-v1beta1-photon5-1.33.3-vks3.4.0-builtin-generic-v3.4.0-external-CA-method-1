@@ -1,0 +1,66 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: cluster-2
+  namespace: ns-1
+spec:
+  clusterNetwork:
+    services:
+      cidrBlocks: ["10.96.0.0/12"]
+    pods:
+      cidrBlocks: ["192.168.0.0/16"]
+    serviceDomain: "cluster.local"
+  topology:
+    class: builtin-generic-v3.4.0
+    version: v1.33
+    controlPlane:
+      replicas: 1
+    workers:
+      machineDeployments:
+        - class: node-pool
+          name: node-pool-1
+          replicas: 1
+    variables:
+      - name: vmClass
+        value: best-effort-small
+      - name: storageClass
+        value: wcp-storage-iscsi
+      - name: osConfiguration
+        value:
+          trust:
+            additionalTrustedCAs:
+              - caCert:
+                  content: |
+                    -----BEGIN CERTIFICATE-----
+                    MIIFtTCCA52gAwIBAgIUFzkynLMJuYDZcZ/mHUU7tmtaZ5MwDQYJKoZIhvcNAQEL
+                    BQAwYjELMAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaWppbmcxEDAOBgNVBAcMB0Jl
+                    aWppbmcxDDAKBgNVBAoMA0lEQzEOMAwGA1UECwwFTEFCMDIxETAPBgNVBAMMCExB
+                    QjAyLUNBMB4XDTI2MDEwOTA1NDk0NloXDTM2MDEwNzA1NDk0NlowYjELMAkGA1UE
+                    BhMCQ04xEDAOBgNVBAgMB0JlaWppbmcxEDAOBgNVBAcMB0JlaWppbmcxDDAKBgNV
+                    BAoMA0lEQzEOMAwGA1UECwwFTEFCMDIxETAPBgNVBAMMCExBQjAyLUNBMIICIjAN
+                    BgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAuwp6mkosR9rLEymKCBI6AxUdny62
+                    hEMXr5CedvUJW1mEvxPmjensOVKWYTfeqUUORzhKMDj0LZUYGu6cuWYNa43HDOxY
+                    NCEshF5Y3MFWxtnSZRudi65QfxSnwoCFzE8A1CEiVp/HpLTDXBgNmKjFEu3ZbLJU
+                    QkOxt4+qOI4v9rr6B8MqUaxdQ68jPqViVPaukuEZPEmk78Wia4nclNN1vpMrE4Nn
+                    VZZOj6VimyuQslrHAdTg6Ai448D3I880FnIL+MuKwrnTKVtib1ksDug67H+TDg5t
+                    0/r23LqxsUD+kDc4C5EriGIgSyFpkjao9v11tG7cWhRBeX1NdS/PU/enVVBNJaiC
+                    gFxECOR9DMq2Xim6njvbC9OFCKOJVxP7oYgyBWnpeD3NEnDRkZugF86+MqW7V+IH
+                    u+cQ0ez2YBnA/WuGvgLrnPnWzv+79ezux6GdstZEM4G5dbRyFB+KenLP6vtsfMZe
+                    RCQ4HjZHWMKQ98G467/o2dJchD0QPJzGT3QNmNI1BDWQGwwldl7b91etq2Avct3I
+                    CP8NDLg+kVvgmc1M2IMgZQ3q5WqTGOYi/r1Ex1zd0IkG265uB1yK6kjMJ9zSk8tS
+                    HB/7ytmtU+salVBWsd0wAxXj2bIWGyBMa3W31UQ8KVpllRK2wKJe4ybwdi6a/kDX
+                    sSOHLu6lWLoQefkCAwEAAaNjMGEwHQYDVR0OBBYEFH9ssd9XzEJkgwq17fj8xwOU
+                    lEjAMB8GA1UdIwQYMBaAFH9ssd9XzEJkgwq17fj8xwOUlEjAMA8GA1UdEwEB/wQF
+                    MAMBAf8wDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4ICAQBZR6qujdNc
+                    yimi254EhPYUbTjEw4baTnDnhM/e54oz6KJGaUldEO0LMrEvBS2IrEUNDmMOclEX
+                    hwHmrjD+Dz+kTeK84qTxg9okIg7vsMblYN6UMZhqkRRRg1cF/XecrSXTPimmntwH
+                    S2VPa0rCIUutL00yy5K9k6Jpc1QbDGYCjeyPoJTxSDNL8lHhLy+W52JPpksbmSFk
+                    kFseM5+n5oW2x49YEFFRnDbADhXv9kNJZ4z6ztTSbqWf87Wh2YI2yRd8CmE4Yb90
+                    mKXzwllE/C1L2aLA4HWNcHFjfOZhDg7BcJXd7LaWHr0ZWHCMsK81u4sQhcGezq2X
+                    9J9QNJvV/g2vavbuKegxuqUPQH/oLfesBKZxuHTq8kmmJz3n0z2TULe01gQ7rsya
+                    QoORrdw7+b/fWAabg2Ret8H2eWX63+zU77+tGbufYFOiLygYVXwubC2v/0o6zL5i
+                    sN/wQmwSNpkTpyf7see9UFmaQyZxlIILN0tqX9O+6KLBPz7xDXcAtP2FWz69yd5T
+                    gB3RBmZnHPwaCxS2qcF7u1wC5JnKu//PPajvom1O0nAr+zm9320gS32iEFzKmH+T
+                    ngf5js+/phWkEr7Bm/WM7/72cpx8/90h5moJN4icCWHNvFsF8IDr/LhhHVrfdY5w
+                    5r01ejd/pSez75eir09Z7/BuUfkCxQ1vGA==
+                    -----END CERTIFICATE-----
