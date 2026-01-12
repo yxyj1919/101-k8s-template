@@ -1,5 +1,9 @@
-
-
+# cluster.x-k8s.io/v1beta1
+# Cluster-1-Photon5-v1.29.15-Tanzu8 
+# Name: Chang WANG
+# Date: 2026-01-12
+# CP*1 + WN*1   
+# Verified by: Chang WANG 
 
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
