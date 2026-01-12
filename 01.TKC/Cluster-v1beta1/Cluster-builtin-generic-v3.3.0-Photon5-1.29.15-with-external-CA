@@ -1,0 +1,45 @@
+# cluster.x-k8s.io/v1beta1
+# Cluster-1-Photon5-v1.29.15-Tanzu8 
+# Name: Chang WANG
+# Date: 2026-01-12
+# CP*1 + WN*1   
+# Verified by: Chang WANG 
+
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: cluster-1
+  namespace: ns-1
+spec:
+  clusterNetwork:
+    services:
+      cidrBlocks: ["10.97.0.0/21"]
+      #cidrBlocks: ["100.64.0.0/13"] # Default value
+    pods:
+      cidrBlocks: ["10.102.0.0/20"]
+      #cidrBlocks: ["100.96.0.0/11"] # Default value
+    serviceDomain: "cluster.local"
+  topology:
+    class: builtin-generic-v3.3.0
+    version: v1.29.15---vmware.1-fips-vkr.2
+    controlPlane:
+      replicas: 1
+    workers:
+      machineDeployments:
+        - class: node-pool
+          name: node-pool-1
+          replicas: 1
+    variables:
+      - name: vmClass
+        value: best-effort-small
+      - name: storageClass
+        value: wcp-storage-iscsi
+      - name: osConfiguration
+        value:
+          trust:
+            additionalTrustedCAs:
+              - caCert:
+                  secretRef:
+                    name: harbor-ca
+                    key: ca.crt
+# Need to create a secret for CA. 
